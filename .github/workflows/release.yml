@@ -13,14 +13,10 @@ jobs:
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
-      # npm with private packages
-      # - run: npm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_ACCESS_TOKEN }}
       - run: npm install
       - run: npm run lint
       - run: npm run build
-      - run: npm publish
-      # public package
-      # - run: npm publish --access public
+      - run: npm publish --access public
 
   pkg-release:
     runs-on: ubuntu-latest
@@ -31,8 +27,6 @@ jobs:
           node-version: '16.x'
           registry-url: 'https://npm.pkg.github.com'
           scope: '@nayotta'
-      # npm with private packages
-      # - run: npm config set '//npm.pkg.github.com/:_authToken' ${{ secrets.PKG_ACCESS_TOKEN }}
       - run: npm install
       - run: npm run lint
       - run: npm run build

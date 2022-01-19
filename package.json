@@ -1,7 +1,7 @@
 {
-  "name": "@nayotta/ts-module-template",
-  "version": "1.0.0",
-  "description": "ts module template",
+  "name": "@nayotta/mta-fission-onion",
+  "version": "0.1.0",
+  "description": "fission nodejs middleware module",
   "main": "lib/index.js",
   "exports": {
     ".": "./lib/index.js"
@@ -19,23 +19,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nayotta/ts-module-template.git"
+    "url": "git+https://github.com/nayotta/mta-fission-onion.git"
   },
   "keywords": [
-    "typescript",
-    "ts",
-    "javascript",
-    "js",
-    "module",
-    "lib",
-    "template"
+    "fission",
+    "nodejs",
+    "middleware",
+    "onion"
   ],
   "author": "nayotta.fe",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nayotta/ts-module-template/issues"
+    "url": "https://github.com/nayotta/mta-fission-onion/issues"
   },
-  "homepage": "https://github.com/nayotta/ts-module-template#readme",
+  "homepage": "https://github.com/nayotta/mta-fission-onion#readme",
   "devDependencies": {
     "@types/jest": "^27.0.2",
     "@typescript-eslint/eslint-plugin": "^5.0.0",

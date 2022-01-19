@@ -19,10 +19,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # - name: Auth token set
-      #   run: npm config set '//npm.pkg.github.com/:_authToken' ${{ secrets.PKG_ACCESS_TOKEN }}
-      #   run: npm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_ACCESS_TOKEN }}
-
       - name: Install dependencies
         run: npm install
 

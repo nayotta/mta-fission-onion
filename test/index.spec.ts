@@ -1,7 +1,7 @@
-import { MtaFissionOnion } from '../src'
+import { Onion } from '../src'
 
 test('basic', async () => {
-	const onion = new MtaFissionOnion()
+	const onion = new Onion()
 
 	onion.use(async (ctx, next) => {
 		ctx.status = 200
@@ -11,16 +11,17 @@ test('basic', async () => {
 		ctx.body = 'hello world'
 		await next()
 	})
-	const res = await onion.go({})
+	const handler = onion.go()
+	const res = await handler({})
 	expect(res.status).toBe(200)
 	expect(res.body).toBe('hello world')
 })
 
 test('use context', async () => {
-	const onion = new MtaFissionOnion()
+	const onion = new Onion()
 
 	onion.use(async (ctx, next) => {
-		if (ctx.context.request.headers['X-internal-token'] !== 'useful token') {
+		if (ctx.request.headers['X-internal-token'] !== 'useful token') {
 			ctx.status = 401
 			ctx.body = 'unauthrization'
 			return
@@ -29,10 +30,14 @@ test('use context', async () => {
 	})
 	onion.use(async (ctx, next) => {
 		ctx.status = 200
-		ctx.body = 'hello ' + ctx.context.request.body.name
+		ctx.headers = {
+			hello: 'onion'
+		}
+		ctx.body = 'hello ' + ctx.request.body.name
 		await next()
 	})
-	const res = await onion.go({
+	const handler = onion.go()
+	const res = await handler({
 		request: {
 			headers: {
 				'X-internal-token': 'useful token'
@@ -43,5 +48,6 @@ test('use context', async () => {
 		}
 	})
 	expect(res.status).toBe(200)
+	expect(res.headers.hello).toBe('onion')
 	expect(res.body).toBe('hello onion')
 })

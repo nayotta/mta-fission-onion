@@ -16,9 +16,9 @@ $ npm install @nayotta/mta-fission-onion
 
 ```js
 // fission function js file
-const { MtaFissionOnion } = require('@nayotta/mta-fission-onion')
+const { Onion } = require('@nayotta/mta-fission-onion')
 
-const onion = new MtaFissionOnion()
+const onion = new Onion()
 
 onion.use(async (ctx, next) => {
 	// TODO: 权限验证
@@ -33,13 +33,22 @@ onion.use(async (ctx, next) => {
 
 onion.use(async (ctx, next) => {
 	// TODO: 处理数据
-	// ctx.context即为fission/nodejs提供的context对象
-	const data = 'hello' + ctx.context.request.body.name
+	// ctx.request即为fission/nodejs提供的express/request对象
+	const data = 'hello' + ctx.request.body.name
 	ctx.status = 200
 	ctx.body = {
 		data
 	}
 })
+
+// 或者批量注入中间件函数
+onion.inject([async (ctx, next) => {
+	// do something
+	await next()
+}, () => {
+	// do something
+	await next()
+}])
 
 module.export = onion.go()
 ```

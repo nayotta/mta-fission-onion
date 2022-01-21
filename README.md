@@ -16,9 +16,9 @@ $ npm install @nayotta/mta-fission-onion
 
 ```js
 // fission function js file
-const { MtaFissionOnion } = require('@nayotta/mta-fission-onion')
+const { Onion } = require('@nayotta/mta-fission-onion')
 
-const onion = new MtaFissionOnion()
+const onion = new Onion()
 
 onion.use(async (ctx, next) => {
 	// TODO: authrization
@@ -33,13 +33,22 @@ onion.use(async (ctx, next) => {
 
 onion.use(async (ctx, next) => {
 	// TODO: deal with data
-	// ctx.context -> fission/nodejs context object
-	const data = 'hello' + ctx.context.request.body.name
+	// ctx.context -> fission/nodejs express/request object
+	const data = 'hello' + ctx.request.body.name
 	ctx.status = 200
 	ctx.body = {
 		data
 	}
 })
+
+// or injext middlewares funcs
+onion.inject([async (ctx, next) => {
+	// do something
+	await next()
+}, () => {
+	// do something
+	await next()
+}])
 
 module.export = onion.go()
 ```

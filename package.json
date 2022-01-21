@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/nayotta/mta-fission-onion#readme",
   "devDependencies": {
+    "@types/express": "^4.17.13",
     "@types/jest": "^27.0.2",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",

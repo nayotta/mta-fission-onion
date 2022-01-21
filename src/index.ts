@@ -2,7 +2,7 @@ import { Context } from './context'
 
 export type TMiddlewareFunc = (ctx: Context, next: () => Promise<void>) => Promise<void>
 
-export class MtaFissionOnion {
+export class Onion {
 	private _middlewares: TMiddlewareFunc[] = []
 
 	public use (middleware: TMiddlewareFunc) {
@@ -13,10 +13,12 @@ export class MtaFissionOnion {
 		this._middlewares = this._middlewares.concat(middlewares)
 	}
 
-	public async go (context: any) {
-		const ctx = new Context(context)
-		await this._handleRequest(ctx, this._middlewares)
-		return this._handleResponse(ctx)
+	public go () {
+		return async (context: any) => {
+			const ctx = new Context(context)
+			await this._handleRequest(ctx, this._middlewares)
+			return this._handleResponse(ctx)
+		}
 	}
 
 	private _handleRequest (ctx: Context, middlewares: TMiddlewareFunc[]) {
@@ -36,9 +38,10 @@ export class MtaFissionOnion {
 	}
 
 	private _handleResponse (ctx: Context) {
-		const { status = 404, body = 'not found' } = ctx
+		const { status, headers, body } = ctx
 		return {
 			status,
+			headers,
 			body
 		}
 	}

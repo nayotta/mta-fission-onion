@@ -1,43 +1,37 @@
-export class Context {
-	private _context: any
-	private _status: number = 404
-	private _body: any = null
+import { Request, Response } from 'express'
 
-	private _headers: {
+export class Context {
+	public status: number | undefined
+	public body: any = null
+
+	private _request: Request
+	private _response: Response
+
+	public headers: {
 		[key: string]: any
 	} = {}
 
-	constructor (context: any) {
-		this._context = context || {}
-	}
-
-	set status (status) {
-		this._status = status
-	}
-
-	get status () {
-		return this._status
-	}
-
-	set headers (headers: {
-		[key: string]: any
+	constructor (context: {
+		request: Request,
+		response: Response
 	}) {
-		this._headers = headers
+		this._request = context.request
+		this._response = context.response
 	}
 
-	get headers () {
-		return this._headers
+	get req () {
+		return this._request
 	}
 
-	set body (body) {
-		this._body = body
+	get request () {
+		return this._request
 	}
 
-	get body () {
-		return this._body
+	get res () {
+		return this._response
 	}
 
-	get context () {
-		return this._context
+	get response () {
+		return this._response
 	}
 }

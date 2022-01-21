@@ -17,6 +17,8 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
 
   pkg-release:
     runs-on: ubuntu-latest
@@ -31,3 +33,5 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PKG_ACCESS_TOKEN }}

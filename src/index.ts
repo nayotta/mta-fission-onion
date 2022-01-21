@@ -1,6 +1,6 @@
 import { Context } from './context'
 
-export type TMiddlewareFunc = (ctx: Context, next: () => Promise<void>) => Promise<void>
+export type TMiddlewareFunc = (ctx: Context, next: () => Promise<void>) => void | Promise<void>
 
 export class Onion {
 	private _middlewares: TMiddlewareFunc[] = []

@@ -4,7 +4,7 @@
 
 [EN](./README.md)
 
-> 在 [`fission/nodejs`](https://fission.io/docs/usage/languages/nodejs/) 内使用的，仿 [`koajs`](https://koajs.com/) 风格洋葱式中间件处理模块.
+> 在 [`fission/node-env`](https://hub.docker.com/r/fission/node-env) 内使用的，仿 [`koajs`](https://koajs.com/) 风格洋葱式中间件处理模块.
 
 ## 安装
 

@@ -4,7 +4,7 @@
 
 [简体中文](./README.cn.md)
 
-> Used in [`fission/nodejs`](https://fission.io/docs/usage/languages/nodejs/) , like [`koajs`](https://koajs.com/) onion code style middleware module.
+> Used in [`fission/node-env`](https://hub.docker.com/r/fission/node-env) , like [`koajs`](https://koajs.com/) onion code style middleware module.
 
 ## Install
 
@@ -41,7 +41,7 @@ onion.use(async (ctx, next) => {
 	}
 })
 
-// or injext middlewares funcs
+// or inject middlewares funcs
 onion.inject([async (ctx, next) => {
 	// do something
 	await next()
